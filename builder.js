@@ -31,15 +31,17 @@ function element(tag, className, text) {
   if (text !== undefined) node.textContent = text;
   return node;
 }
-function renderConversation() {
-  conversation.replaceChildren();
-  const welcome = element('div', 'message');
-  const avatar = element('div', 'avatar', '🤖');
-  const content = element('div', 'message-content');
-  content.append(element('strong', '', 'Darker'), element('p', '', 'Welcome! Pick an idea below or describe what you want to make. In this demo, I can switch layouts, change colors, and update text. Try “headline: Hello world” or use Customize.'));
-  welcome.append(avatar, content);
-  conversation.append(welcome);
-  state.messages.forEach(({ role, text }) => {
+function renderConversation(messages = state.messages, reset = true) {
+  if (reset) {
+    conversation.replaceChildren();
+    const welcome = element('div', 'message');
+    const avatar = element('div', 'avatar', '🤖');
+    const content = element('div', 'message-content');
+    content.append(element('strong', '', 'Darker'), element('p', '', 'Welcome! Pick an idea below or describe what you want to make. In this demo, I can switch layouts, change colors, and update text. Try “headline: Hello world” or use Customize.'));
+    welcome.append(avatar, content);
+    conversation.append(welcome);
+  }
+  messages.forEach(({ role, text }) => {
     const message = element('div', `message ${role === 'user' ? 'user' : ''}`);
     if (role !== 'user') message.append(element('div', 'avatar', '🤖'));
     const body = element('div', 'message-content');
@@ -47,6 +49,8 @@ function renderConversation() {
     message.append(body);
     conversation.append(message);
   });
+  // Keep the welcome message and the latest 30 messages without re-inserting history.
+  while (conversation.children.length > 31) conversation.children[1].remove();
   conversation.scrollTop = conversation.scrollHeight;
 }
 function renderPreview() {
@@ -73,14 +77,17 @@ function renderPreview() {
   for (const field of ['name', 'headline', 'description', 'button', 'accent']) customizeForm.elements[field].value = project[field];
 }
 function applyPrompt(text) {
-  const lower = text.toLowerCase();
-  const kind = /coffee|café|cafe/.test(lower) ? 'coffee' : /portfolio|photograph/.test(lower) ? 'portfolio' : /ecommerce|e-commerce|online store|shop/.test(lower) ? 'ecommerce' : /blog|journal/.test(lower) ? 'blog' : /saas|dashboard|habit|app/.test(lower) ? 'saas' : null;
+  // Field values are content, not instructions for layout or accent changes.
+  const instructions = text.replace(/^\s*(?:headline|description|name|button)\s*:\s*.*$/gim, '');
+  const lower = instructions.toLowerCase();
+  const kind = /(?:^|\W)(?:coffee|café|cafe)(?=$|\W)/.test(lower) ? 'coffee' : /\b(?:portfolios?|photograph(?:s|y|er|ers)?)\b/.test(lower) ? 'portfolio' : /\b(?:e-?commerce|online stores?|shop(?:s|ping)?)\b/.test(lower) ? 'ecommerce' : /\b(?:blog(?:s|ging)?|journals?)\b/.test(lower) ? 'blog' : /\b(?:saas|dashboards?|habits?|app(?:s|lication(?:s)?)?)\b/.test(lower) ? 'saas' : null;
   const changes = [];
-  if (kind) {
+  const isFreshProject = !state.messages.length && JSON.stringify(state.project) === JSON.stringify(templates.starter);
+  if (kind && (isFreshProject || window.confirm('Switch layouts? This replaces your project details.'))) {
     state.project = { ...templates[kind] };
     changes.push(`${kind === 'saas' ? 'SaaS' : kind} layout`);
   }
-  const color = Object.keys(colors).find((name) => new RegExp(`\\b${name}\\b`, 'i').test(text));
+  const color = Object.keys(colors).find((name) => new RegExp(`\\b${name}\\b`, 'i').test(instructions));
   if (color) { state.project.accent = colors[color]; changes.push(`${color} accent`); }
   const fields = { headline: 'headline', description: 'description', name: 'name', button: 'button' };
   for (const [label, field] of Object.entries(fields)) {
@@ -89,28 +96,53 @@ function applyPrompt(text) {
   }
   state.messages.push({ role: 'user', text }, { role: 'assistant', text: changes.length ? `Updated your ${changes.join(' and ')}. You can fine-tune every detail in Customize.` : 'This demo can switch layouts for a coffee shop, store, blog, portfolio, or SaaS app; change the accent color; or update text with “headline: your text”. Try one of those or open Customize.' });
   state.messages = state.messages.slice(-30);
-  renderConversation(); renderPreview(); save();
+  renderConversation(state.messages.slice(-2), false); renderPreview(); save();
 }
+let hasSavedProject = false;
 try {
   const saved = JSON.parse(localStorage.getItem(storageKey));
-  if (saved && saved.project && Array.isArray(saved.messages)) state = { project: { ...templates.starter, ...saved.project }, messages: saved.messages.slice(-30) };
+  if (saved && saved.project && Array.isArray(saved.messages)) {
+    state = { project: { ...templates.starter, ...saved.project }, messages: saved.messages.slice(-30) };
+    hasSavedProject = true;
+  }
 } catch { /* Start fresh if storage is unavailable or invalid. */ }
 const params = new URLSearchParams(location.search);
 const initialTemplate = params.get('template');
 const initialPrompt = params.get('prompt');
-if (initialTemplate && Object.hasOwn(templates, initialTemplate)) {
-  state = { project: { ...templates[initialTemplate] }, messages: [{ role: 'assistant', text: `Your ${initialTemplate} starting point is ready. Use Customize to make it yours.` }] };
-  save();
+const validTemplate = initialTemplate && Object.hasOwn(templates, initialTemplate);
+function openInitialProject() {
+  if (validTemplate) {
+    state = { project: { ...templates[initialTemplate] }, messages: [{ role: 'assistant', text: `Your ${initialTemplate} starting point is ready. Use Customize to make it yours.` }] };
+    save();
+  }
+  renderConversation(); renderPreview();
+  if (initialPrompt) applyPrompt(initialPrompt);
+  if (initialTemplate || initialPrompt) history.replaceState(null, '', location.pathname);
 }
-renderConversation(); renderPreview();
-if (initialPrompt) applyPrompt(initialPrompt.slice(0, 1000));
-if (initialTemplate || initialPrompt) history.replaceState(null, '', location.pathname);
+if (validTemplate && hasSavedProject) {
+  renderConversation(); renderPreview();
+  const decision = document.querySelector('#template-decision');
+  decision.hidden = false;
+  decision.focus();
+  document.querySelector('#accept-template').addEventListener('click', () => {
+    decision.hidden = true;
+    openInitialProject();
+    promptInput.focus();
+  });
+  document.querySelector('#keep-project').addEventListener('click', () => {
+    // Retain the requested template and prompt in the URL for a later visit.
+    decision.hidden = true;
+    promptInput.focus();
+  });
+} else {
+  openInitialProject();
+}
 
 form.addEventListener('submit', (event) => {
   event.preventDefault();
   const text = promptInput.value.trim();
   if (!text) { promptInput.focus(); return; }
-  applyPrompt(text.slice(0, 1000));
+  applyPrompt(text);
   promptInput.value = '';
 });
 document.querySelectorAll('[data-suggestion]').forEach((button) => button.addEventListener('click', () => { promptInput.value = button.dataset.suggestion; promptInput.focus(); }));

@@ -8,8 +8,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="builder.css?v=3">
-  <script src="builder.js?v=3" defer></script>
+  <link rel="stylesheet" href="builder.css?v=4">
+  <script src="builder.js?v=4" defer></script>
 </head>
 <body>
   <header class="app-header">
@@ -19,7 +19,11 @@
   <main class="workspace">
     <section class="chat-panel" aria-label="Project conversation">
       <div class="chat-top"><div><span class="eyebrow">YOUR WORKSPACE</span><h1>Let's make it real.</h1><p>Every great idea starts somewhere.</p></div><span class="workspace-spark" aria-hidden="true">✳</span></div>
-      <div class="conversation" id="conversation" aria-live="polite" tabindex="0"></div>
+      <section id="template-decision" class="template-decision" aria-label="Open template confirmation" tabindex="-1" hidden>
+        <h2>Open a new starting point?</h2><p>This replaces your saved project and conversation. Keep your work to cancel.</p>
+        <div class="template-actions"><button id="accept-template" type="button">Open template</button><button id="keep-project" type="button">Keep my work</button></div>
+      </section>
+      <div class="conversation" id="conversation" role="log" aria-label="Conversation history" aria-live="polite" aria-atomic="false" aria-relevant="additions" tabindex="0"></div>
       <div class="chat-compose">
         <div class="suggestions-label">A LITTLE INSPIRATION</div>
         <div class="suggestion-list"><button type="button" data-suggestion="Build a coffee shop website">☕ Coffee shop</button><button type="button" data-suggestion="Create a portfolio website">✳ Portfolio</button><button type="button" data-suggestion="Build a SaaS app">◒ SaaS app</button></div>
