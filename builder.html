@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A playful workspace for bringing your next idea to life.">
+  <title>Builder — Lovable</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="builder.css">
+  <script src="builder.js" defer></script>
+</head>
+<body>
+  <header class="app-header">
+    <div class="header-left"><a class="brand" href="index.html" aria-label="Lovable home"><span class="brand-mark"></span><span>lovable</span></a><span class="header-divider"></span><div class="project-heading"><strong id="project-name">My lovely project</strong><span id="save-status">Saved on this device</span></div></div>
+    <div class="header-right"><button class="new-project" id="new-project" type="button">New project</button><button class="download-button" id="download" type="button">Download <span aria-hidden="true">↓</span></button></div>
+  </header>
+  <main class="workspace">
+    <section class="chat-panel" aria-label="Project conversation">
+      <div class="chat-top"><div><span class="eyebrow">YOUR WORKSPACE</span><h1>Let's make it real.</h1><p>Every great idea starts somewhere.</p></div><span class="workspace-spark" aria-hidden="true">✳</span></div>
+      <div class="conversation" id="conversation" aria-live="polite" tabindex="0"></div>
+      <div class="chat-compose">
+        <div class="suggestions-label">A LITTLE INSPIRATION</div>
+        <div class="suggestion-list"><button type="button" data-suggestion="Build a coffee shop website">☕ Coffee shop</button><button type="button" data-suggestion="Create a portfolio website">✳ Portfolio</button><button type="button" data-suggestion="Build a SaaS app">◒ SaaS app</button></div>
+        <form id="builder-form" class="composer"><label class="sr-only" for="builder-prompt">Describe a change</label><textarea id="builder-prompt" rows="3" placeholder="Describe your idea or a change..."></textarea><div class="composer-footer"><span>Try “make it blue”</span><button type="submit" aria-label="Send prompt">↑</button></div></form>
+        <p class="demo-note"><span></span> Demo mode · Changes are saved on this device</p>
+      </div>
+    </section>
+    <section class="preview-panel" aria-label="Project preview">
+      <div class="preview-toolbar"><div class="preview-title"><span class="preview-dot"></span> Preview <span class="preview-label">YOUR PROJECT</span></div><div class="toolbar-actions"><div class="device-switch" role="group" aria-label="Preview size"><button type="button" class="active" data-device="desktop" aria-pressed="true" aria-label="Desktop preview">▭</button><button type="button" data-device="mobile" aria-pressed="false" aria-label="Mobile preview">▯</button></div><button class="customize-button" id="customize-toggle" type="button" aria-expanded="false" aria-controls="customize-panel">⚙ <span>Customize</span></button></div></div>
+      <div class="preview-stage"><div class="browser-frame" id="browser-frame"><div class="browser-bar"><div class="browser-dots"><i></i><i></i><i></i></div><div class="address-bar"><span>⌑</span> <span id="preview-address">my-lovely-project.lovable.app</span></div><span class="browser-refresh">↻</span></div><div class="site-preview" id="site-preview"></div></div></div>
+      <aside class="customize-panel" id="customize-panel" hidden><div class="customize-heading"><div><span class="eyebrow">MAKE IT YOURS</span><h2>Customize</h2></div><button type="button" id="close-customize" aria-label="Close customize panel">×</button></div><p>Edit the details and see them update instantly.</p><form id="customize-form"><label>Project name<input name="name" maxlength="40"></label><label>Headline<input name="headline" maxlength="80"></label><label>Description<textarea name="description" rows="3" maxlength="180"></textarea></label><label>Button text<input name="button" maxlength="30"></label><label>Accent color <input type="color" name="accent"></label></form><div class="customize-tip">✳ &nbsp; Your changes are saved automatically.</div></aside>
+    </section>
+  </main>
+</body>
+</html>

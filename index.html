@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Turn your ideas into apps and websites by chatting with AI.">
+  <title>Lovable — Build something Lovable</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <a class="wordmark" href="#top" aria-label="Lovable home"><span class="brand-mark" aria-hidden="true"><span></span></span>lovable</a>
+    <nav class="desktop-nav" aria-label="Main navigation"><a href="#how-it-works">How it works</a><a href="#templates">Explore</a><a href="#community">Community</a></nav>
+    <div class="header-actions"><a class="login" href="https://lovable.dev/login">Log in</a><a class="button button-dark small" href="builder.html">Get started <span aria-hidden="true">↗</span></a></div>
+  </header>
+
+  <main id="top">
+    <section class="hero wrap">
+      <div class="hero-glow" aria-hidden="true"></div>
+      <a href="#how-it-works" class="announcement"><span class="sparkle">✳</span> Your idea is just the beginning <span aria-hidden="true">→</span></a>
+      <h1>Build something <span>Lovable.</span></h1>
+      <p class="hero-copy">Create apps and websites by chatting with AI.<br> From idea to live product, in minutes.</p>
+      <form class="prompt-box" id="prompt-form">
+        <label class="sr-only" for="prompt">Describe what you want to build</label>
+        <textarea id="prompt" rows="2" placeholder="Ask Lovable to create a landing page for my..."></textarea>
+        <div class="prompt-bottom"><span class="prompt-hint"><span class="plus">＋</span> Describe your idea</span><button class="button button-dark build-button" type="submit">Build <span aria-hidden="true">↗</span></button></div>
+      </form>
+      <div class="suggestions"><span>Try an idea:</span><button type="button" data-prompt="Build a landing page for my coffee shop">☕ Coffee shop</button><button type="button" data-prompt="Create a portfolio website for a photographer">✳ Portfolio</button><button type="button" data-prompt="Build a simple app to track my habits">◒ Habit tracker</button></div>
+      <div class="trust"><p>Teams from top companies build with Lovable</p><a class="trust-stat" href="https://techcrunch.com/2025/11/10/lovable-says-its-nearing-8-million-users-as-the-year-old-ai-coding-startup-eyes-more-corporate-employees/">More than half of Fortune 500 companies use Lovable <span>↗</span></a><span class="trust-date">Reported November 2025</span></div>
+    </section>
+
+    <section class="how section-pad" id="how-it-works">
+      <div class="wrap">
+        <div class="section-heading centered"><span class="eyebrow"><span class="dot"></span> THE WAY IT WORKS</span><h2>Big ideas start small.</h2><p>From the first spark to your next big thing.<br>Building has never felt this natural.</p></div>
+        <div class="steps-grid">
+          <article class="step"><div class="step-visual idea-visual" aria-hidden="true"><div class="little-window"><div class="window-top"><span></span><span></span><span></span></div><div class="idea-line">I have an idea <span>✳</span></div><div class="fake-line wide"></div><div class="fake-line"></div><div class="fake-cursor">↗</div></div><span class="floating-star">✳</span></div><div class="step-meta"><span>01 / THE IDEA</span><span>↗</span></div><h3>Start with an idea</h3><p>Tell Lovable what you want to build, in your own words. No code, no complicated setup.</p></article>
+          <article class="step"><div class="step-visual life-visual" aria-hidden="true"><div class="mini-browser"><div class="mini-top"><span></span><span></span><span></span><div></div></div><div class="mini-layout"><div class="mini-sidebar"><b></b><i></i><i></i><i></i></div><div class="mini-content"><div class="mini-hero"><span>Make it happen.</span><b></b></div><div class="mini-tiles"><i></i><i></i><i></i></div></div></div></div><div class="life-spark">✳</div></div><div class="step-meta"><span>02 / THE MAGIC</span><span>↗</span></div><h3>Watch it come to life</h3><p>See your idea turn into a working app or website, right before your eyes.</p></article>
+          <article class="step"><div class="step-visual ship-visual" aria-hidden="true"><div class="ship-orbit orbit-one"></div><div class="ship-orbit orbit-two"></div><div class="ship-card"><div class="ship-icon">✓</div><strong>Ready to launch</strong><span>Your idea, out in the world.</span><b>Publish <span>↗</span></b></div></div><div class="step-meta"><span>03 / THE LAUNCH</span><span>↗</span></div><h3>Refine and ship</h3><p>Make it yours with a few more messages, then share it with the world.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="templates section-pad" id="templates"><div class="wrap">
+      <div class="section-top"><div class="section-heading"><span class="eyebrow"><span class="dot"></span> MADE WITH LOVABLE</span><h2>Anything you imagine.<br>All in one place.</h2><p>A little inspiration goes a long way. Explore what you can build.</p></div><a class="text-link" href="builder.html">Explore more <span>↗</span></a></div>
+      <div class="filters" role="group" aria-label="Filter projects"><button class="active" type="button" data-filter="all" aria-pressed="true">All projects</button><button type="button" data-filter="ecommerce" aria-pressed="false">Ecommerce</button><button type="button" data-filter="blog" aria-pressed="false">Blogs</button><button type="button" data-filter="portfolio" aria-pressed="false">Portfolios</button><button type="button" data-filter="saas" aria-pressed="false">SaaS</button></div>
+      <div class="template-grid">
+        <article class="project" data-category="ecommerce"><div class="project-image shop-preview" aria-hidden="true"><div class="shop-page"><div class="shop-nav"><strong>FORME.</strong><span>Shop &nbsp;&nbsp; About &nbsp;&nbsp; Journal</span><span>Bag (0)</span></div><div class="shop-content"><div class="shop-copy"><small>THE EVERYDAY EDIT</small><strong>Made for<br>living in.</strong><span>Considered essentials for every day.</span><b>Shop the collection ↗</b></div><div class="shop-photo"></div></div></div></div><div class="project-info"><div><h3><a href="builder.html?template=ecommerce">Forme Studio <span class="sr-only">— use template</span></a></h3><p>A little shop with a lot of style</p></div><span>ECOMMERCE ↗</span></div></article>
+        <article class="project" data-category="blog"><div class="project-image journal-preview" aria-hidden="true"><div class="journal-page"><div class="journal-nav"><strong>the daily note<span>.</span></strong><span>Stories &nbsp;&nbsp; About &nbsp;&nbsp; Subscribe</span></div><div class="journal-content"><div><small>CURIOUS MINDS, COME ON IN</small><strong>Good ideas<br>live here.</strong><span>A journal for the little things and the big ideas.</span><b>Read the latest &nbsp; ↗</b></div><div class="journal-photo"></div></div><div class="journal-bottom">A LITTLE INSPIRATION FOR YOUR INBOX <span>✳ &nbsp; ✳ &nbsp; ✳</span></div></div></div><div class="project-info"><div><h3><a href="builder.html?template=blog">The Daily Note <span class="sr-only">— use template</span></a></h3><p>Stories worth slowing down for</p></div><span>BLOG ↗</span></div></article>
+        <article class="project" data-category="portfolio"><div class="project-image portfolio-preview" aria-hidden="true"><div class="portfolio-page"><div class="portfolio-nav"><strong>alex morgan<span>®</span></strong><span>WORK &nbsp;&nbsp; ABOUT &nbsp;&nbsp; CONTACT</span></div><div class="portfolio-copy"><small>INDEPENDENT CREATIVE & DIGITAL DESIGNER</small><strong>Making space<br>for <em>good ideas.</em></strong><span>SELECTED WORK &nbsp; ↓</span></div><div class="portfolio-photo"></div></div></div><div class="project-info"><div><h3><a href="builder.html?template=portfolio">Alex Morgan <span class="sr-only">— use template</span></a></h3><p>A portfolio with a point of view</p></div><span>PORTFOLIO ↗</span></div></article>
+        <article class="project" data-category="saas"><div class="project-image saas-preview" aria-hidden="true"><div class="saas-page"><div class="saas-side"><strong><span>✳</span> flowly</strong><small>WORKSPACE</small><i>▦ &nbsp; Overview</i><i>◷ &nbsp; My tasks</i><i>▤ &nbsp; Projects</i><i>◉ &nbsp; Team</i><div class="saas-profile">● &nbsp; Olivia Chen</div></div><div class="saas-main"><div class="saas-top">Overview <span>✳ &nbsp; ◯</span></div><small>MONDAY, JUNE 10</small><h4>Good morning, Olivia ✨</h4><p>Here's what's happening with your projects.</p><div class="saas-stats"><div>Tasks completed<strong>24 <small>↗ 12%</small></strong></div><div>In progress<strong>8 <small>↗ 4%</small></strong></div><div>Projects<strong>6 <small>↗ 2%</small></strong></div></div><div class="saas-chart"><b>Activity overview</b><div class="bars"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div></div></div></div><div class="project-info"><div><h3><a href="builder.html?template=saas">Flowly <span class="sr-only">— use template</span></a></h3><p>A calmer way to get things done</p></div><span>SAAS APP ↗</span></div></article>
+      </div>
+    </div></section>
+
+    <section class="community section-pad" id="community"><div class="wrap community-inner"><div class="community-copy"><span class="eyebrow"><span class="dot"></span> BUILT TOGETHER</span><h2>Ideas are better<br>out in the world.</h2><p>From first-time founders to experienced teams, people everywhere are bringing their ideas to life with Lovable.</p><a class="button button-dark" href="builder.html">Start building <span>↗</span></a></div><div class="stats"><div><strong>60M</strong><span>projects hosted</span></div><div><strong>900M</strong><span>monthly visitors to projects</span></div><div><strong>50%+</strong><span>of Fortune 500 companies use Lovable</span></div><p class="stats-source">Projects and visitors reported August 2026 · <a href="https://techcrunch.com/2026/08/12/lovable-confirms-new-13-3b-valuation-raises-another-400m/">Source ↗</a><br>Fortune 500 usage reported November 2025 · <a href="https://techcrunch.com/2025/11/10/lovable-says-its-nearing-8-million-users-as-the-year-old-ai-coding-startup-eyes-more-corporate-employees/">Source ↗</a></p></div><div class="community-glow" aria-hidden="true"></div></div></section>
+    <section class="final-cta"><div class="wrap"><div class="final-mark"><span class="brand-mark"><span></span></span></div><h2>What will you bring to life?</h2><p>Whatever it is, let's build it together.</p><a class="button button-dark" href="builder.html">Get started for free <span>↗</span></a></div></section>
+  </main>
+  <footer><div class="wrap footer-inner"><a class="wordmark" href="#top"><span class="brand-mark" aria-hidden="true"><span></span></span>lovable</a><p>Made for the ideas that won't leave you alone.</p><div><a href="#how-it-works">How it works</a><a href="#templates">Explore</a><a href="builder.html">Get started ↗</a></div><span>© 2026 Lovable</span></div></footer>
+</body>
+</html>
