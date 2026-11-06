@@ -24,6 +24,7 @@ function save() {
   } catch {
     document.querySelector('#save-status').textContent = 'Unable to save on this device';
   }
+  document.querySelector('#demo-save-status').textContent = document.querySelector('#save-status').textContent;
 }
 function element(tag, className, text) {
   const node = document.createElement(tag);

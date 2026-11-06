@@ -21,17 +21,18 @@ function workspace({ saved = null, search = '', confirm = true } = {}) {
   const select = id => { if (!nodes.has(id)) nodes.set(id, new Node()); return nodes.get(id); };
   select('#customize-form').elements = Object.fromEntries(['name', 'headline', 'description', 'button', 'accent'].map(key => [key, {}]));
   let storage = saved && JSON.stringify(saved);
+  let failSaving = false;
   let confirmations = 0;
   let clearedUrl = false;
   const context = vm.createContext({
     document: { querySelector: select, querySelectorAll: () => [], createElement: () => new Node() },
-    localStorage: { getItem: () => storage, setItem: (_, value) => { storage = value; } },
+    localStorage: { getItem: () => storage, setItem: (_, value) => { if (failSaving) throw new Error('Storage unavailable'); storage = value; } },
     location: { search, pathname: '/builder.html' },
     history: { replaceState() { clearedUrl = true; } },
     window: { confirm() { confirmations++; return confirm; } }, URLSearchParams
   });
   vm.runInContext(source, context);
-  return { run: text => vm.runInContext(text, context), nodes, saved: () => storage, confirmations: () => confirmations, cleared: () => clearedUrl };
+  return { run: text => vm.runInContext(text, context), nodes, setSaveFailure: value => { failSaving = value; }, saved: () => storage, confirmations: () => confirmations, cleared: () => clearedUrl };
 }
 test('layout words use boundaries and preserve intended variants', () => {
   for (const text of ['Happy days', 'A workshop for makers']) {
@@ -100,4 +101,20 @@ test('long prompts survive initial navigation and subsequent submission', () => 
   app.nodes.get('#builder-form').listeners.submit({ preventDefault() {} });
   assert.equal(app.run('state.messages[2].text'), text);
   assert.equal(input.value, '');
+});
+
+test('both save indicators report storage failure and recovery', () => {
+  const app = workspace();
+  app.setSaveFailure(true);
+  app.run('applyPrompt("headline: Unsaved edit")');
+  for (const id of ['#save-status', '#demo-save-status']) {
+    assert.equal(app.nodes.get(id).textContent, 'Unable to save on this device');
+  }
+  assert.equal(app.saved(), null);
+  app.setSaveFailure(false);
+  app.run('save()');
+  for (const id of ['#save-status', '#demo-save-status']) {
+    assert.equal(app.nodes.get(id).textContent, 'Saved on this device');
+  }
+  assert.equal(JSON.parse(app.saved()).project.headline, 'Unsaved edit');
 });

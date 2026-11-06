@@ -38,3 +38,5 @@
 
 /* Match the Flowly starting point available in the demo builder. */
 .flowly-page{background:#fdfcf8;color:#202421;padding:22px}.flowly-nav{display:flex;justify-content:space-between;font-size:9px}.flowly-nav strong{font-size:13px}.flowly-hero{display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:25px;margin-top:35px}.flowly-hero small{font-size:6px;letter-spacing:.12em;color:#6b629f}.flowly-hero h4{font-size:29px;line-height:1.05;letter-spacing:-.05em;margin:12px 0}.flowly-hero p{font-size:7px;line-height:1.6;color:#687068}.flowly-hero b{display:inline-block;background:#202020;color:white;font-size:7px;padding:9px 12px;border-radius:4px;margin-top:8px}.flowly-visual{height:185px;background:#827ac1;border-radius:8px;display:flex;flex-direction:column;align-items:center;justify-content:center;color:white}.flowly-visual span{font-size:85px;line-height:1.3}.flowly-visual small{color:white;font-size:7px;letter-spacing:0}
+
+.project-info h3 a{text-decoration:underline;text-underline-offset:3px}
