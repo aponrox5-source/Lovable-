@@ -95,7 +95,7 @@ function applyPrompt(text) {
     const match = text.match(new RegExp(`(?:^|\\n)\\s*${label}\\s*:\\s*(.+)`, 'i'));
     if (match) { state.project[field] = match[1].trim().slice(0, field === 'description' ? 180 : field === 'headline' ? 80 : field === 'name' ? 40 : 30); changes.push(label); }
   }
-  state.messages.push({ role: 'user', text }, { role: 'assistant', text: changes.length ? `Updated your ${changes.join(' and ')}. You can fine-tune every detail in Customize.` : 'This demo can switch layouts for a coffee shop, store, blog, portfolio, or SaaS app; change the accent color; or update text with “headline: your text”. Try one of those or open Customize.' });
+  state.messages.push({ role: 'user', text }, { role: 'assistant', text: changes.length ? `Updated your ${changes.join(' and ')}. You can fine-tune every detail in Customize.` : 'This demo can switch between landing-page layouts for a coffee shop, store, blog, portfolio, or SaaS product; change the accent color; or update text with “headline: your text”. Try one of those or open Customize.' });
   state.messages = state.messages.slice(-30);
   renderConversation(state.messages.slice(-2), false); renderPreview(); save();
 }
@@ -166,6 +166,7 @@ document.querySelectorAll('[data-device]').forEach((button) => button.addEventLi
   document.querySelectorAll('[data-device]').forEach((item) => { const selected = item === button; item.classList.toggle('active', selected); item.setAttribute('aria-pressed', String(selected)); });
 }));
 document.querySelector('#new-project').addEventListener('click', () => {
+  if (!window.confirm('Start a new project? This replaces your current project and conversation saved on this device.')) return;
   state = { project: { ...templates.starter }, messages: [] }; renderConversation(); renderPreview(); save(); setCustomize(false);
 });
 function escapeHtml(value) { return String(value).replace(/[&<>"']/g, (char) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[char]); }

@@ -92,6 +92,19 @@ test('conversation appends new nodes, caps history, and resets', () => {
   app.nodes.get('#new-project').listeners.click();
   assert.equal(log.children.length, 1); assert.equal(app.run('state.messages.length'), 0);
 });
+test('declining a new project preserves the project, conversation, and saved data', () => {
+  const app = workspace({ confirm: false });
+  app.run('applyPrompt("headline: My work")');
+  const saved = app.saved();
+  const log = app.nodes.get('#conversation');
+  const messages = [...log.children];
+  app.nodes.get('#new-project').listeners.click();
+  assert.equal(app.confirmations(), 1);
+  assert.equal(app.saved(), saved);
+  assert.equal(app.run('state.project.headline'), 'My work');
+  assert.equal(app.run('state.messages.length'), 2);
+  assert.deepEqual(log.children, messages);
+});
 test('long prompts survive initial navigation and subsequent submission', () => {
   const text = 'x'.repeat(1200) + '\nheadline: After character 1000';
   const app = workspace({ search: '?prompt=' + encodeURIComponent(text) });

@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="builder.css?v=6">
-  <script src="builder.js?v=5" defer></script>
+  <script src="builder.js?v=6" defer></script>
 </head>
 <body>
   <header class="app-header">
@@ -26,7 +26,7 @@
       <div class="conversation" id="conversation" role="log" aria-label="Conversation history" aria-live="polite" aria-atomic="false" aria-relevant="additions" tabindex="0"></div>
       <div class="chat-compose">
         <div class="suggestions-label">A LITTLE INSPIRATION</div>
-        <div class="suggestion-list"><button type="button" data-suggestion="Build a coffee shop website">☕ Coffee shop</button><button type="button" data-suggestion="Create a portfolio website">✳ Portfolio</button><button type="button" data-suggestion="Build a SaaS app">◒ SaaS app</button></div>
+        <div class="suggestion-list"><button type="button" data-suggestion="Build a coffee shop website">☕ Coffee shop</button><button type="button" data-suggestion="Create a portfolio website">✳ Portfolio</button><button type="button" data-suggestion="Build a SaaS landing page">◒ SaaS landing page</button></div>
         <form id="builder-form" class="composer"><label class="sr-only" for="builder-prompt">Describe a change</label><textarea id="builder-prompt" rows="3" placeholder="Describe your idea or a change..."></textarea><div class="composer-footer"><span>Try “make it blue”</span><button type="submit" aria-label="Send prompt">↑</button></div></form>
         <p class="demo-note"><span aria-hidden="true"></span> Demo mode · <span id="demo-save-status">Saved on this device</span></p>
       </div>
@@ -34,7 +34,7 @@
     <section class="preview-panel" aria-label="Project preview">
       <div class="preview-toolbar"><div class="preview-title"><span class="preview-dot"></span> Preview <span class="preview-label">YOUR PROJECT</span></div><div class="toolbar-actions"><div class="device-switch" role="group" aria-label="Preview size"><button type="button" class="active" data-device="desktop" aria-pressed="true" aria-label="Desktop preview">▭</button><button type="button" data-device="mobile" aria-pressed="false" aria-label="Mobile preview">▯</button></div><button class="customize-button" id="customize-toggle" type="button" aria-expanded="false" aria-controls="customize-panel">⚙ <span>Customize</span></button></div></div>
       <div class="preview-stage"><div class="browser-frame" id="browser-frame"><div class="browser-bar"><div class="browser-dots"><i></i><i></i><i></i></div><div class="address-bar"><span>⌑</span> <span id="preview-address">Project preview</span></div><span class="browser-refresh">↻</span></div><div class="site-preview" id="site-preview"></div></div></div>
-      <aside class="customize-panel" id="customize-panel" hidden><div class="customize-heading"><div><span class="eyebrow">MAKE IT YOURS</span><h2>Customize</h2></div><button type="button" id="close-customize" aria-label="Close customize panel">×</button></div><p>Edit the details and see them update instantly.</p><form id="customize-form"><label>Project name<input name="name" maxlength="40"></label><label>Headline<input name="headline" maxlength="80"></label><label>Description<textarea name="description" rows="3" maxlength="180"></textarea></label><label>Button text<input name="button" maxlength="30"></label><label>Accent color <input type="color" name="accent"></label></form><div class="customize-tip">✳ &nbsp; Your changes are saved automatically.</div></aside>
+      <aside class="customize-panel" id="customize-panel" hidden><div class="customize-heading"><div><span class="eyebrow">MAKE IT YOURS</span><h2>Customize</h2></div><button type="button" id="close-customize" aria-label="Close customize panel">×</button></div><p>Edit the details and see them update instantly.</p><form id="customize-form"><label>Project name<input name="name" maxlength="40"></label><label>Headline<input name="headline" maxlength="80"></label><label>Description<textarea name="description" rows="3" maxlength="180"></textarea></label><label>Button text<input name="button" maxlength="30"></label><label>Accent color <input type="color" name="accent"></label></form><div class="customize-tip">✳ &nbsp; Your edits are saved on this device when browser storage is available.</div></aside>
     </section>
   </main>
 </body>
