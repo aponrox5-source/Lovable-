@@ -28,3 +28,11 @@ document.querySelectorAll('[data-filter]').forEach((button) => {
     });
   });
 });
+
+// Treat each template as a fixed canvas, like a screenshot, instead of a tiny page.
+const previewObserver = new ResizeObserver((entries) => {
+  entries.forEach(({ target, contentRect }) => {
+    target.style.setProperty('--preview-scale', String(contentRect.width * 0.88 / 480));
+  });
+});
+document.querySelectorAll('.project-image').forEach((preview) => previewObserver.observe(preview));

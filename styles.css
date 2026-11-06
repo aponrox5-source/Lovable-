@@ -9,3 +9,22 @@
 @media(max-width:600px){.trust-stat{font-size:15px}}
 .stats-source a{white-space:nowrap}
 @media(max-width:600px){.portfolio-copy{max-width:62%;padding:32px 0 0 5px}.portfolio-copy strong{font-size:28px}.portfolio-photo{width:39%;height:58%}}
+
+/* Preserve screenshot proportions at every card width. */
+.project-image{position:relative;height:auto;aspect-ratio:1.6;padding:0}
+.project-image>div{position:absolute;left:6%;top:8%;width:480px;height:300px;flex:none;transform:scale(var(--preview-scale,1));transform-origin:top left}
+.shop-copy strong{font-size:38px}.journal-content strong{font-size:36px}
+.portfolio-copy{max-width:56%;padding:40px 0 0 10px}
+.portfolio-copy strong{font-size:38px}.portfolio-photo{width:39%;height:60%}
+.project-info{gap:12px}.project-info>div{min-width:0}.project-info>span{flex-shrink:0}
+.prompt-box textarea{resize:none}
+@media(max-width:600px){
+.hero{padding-top:42px}.hero h1{font-size:clamp(36px,11vw,48px)}
+.hero-copy{font-size:16px}.prompt-box textarea{font-size:16px;min-height:74px}
+.suggestions button,.filters button{min-height:44px}.button.small,.build-button{min-height:44px}
+.filters{gap:6px}.stats{gap:28px 20px}.stats-source{grid-column:1/-1}
+.project-info{flex-wrap:wrap}.section-heading p,.step p{font-size:15px}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{transition:none!important}}
+.template-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.project{min-width:0}
+@media(max-width:600px){.template-grid{grid-template-columns:minmax(0,1fr)}}
