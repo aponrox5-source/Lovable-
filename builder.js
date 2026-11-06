@@ -34,16 +34,16 @@ function element(tag, className, text) {
 function renderConversation() {
   conversation.replaceChildren();
   const welcome = element('div', 'message');
-  const avatar = element('div', 'avatar', '✳');
+  const avatar = element('div', 'avatar', '🤖');
   const content = element('div', 'message-content');
-  content.append(element('strong', '', 'Lovable'), element('p', '', 'Welcome! Pick an idea below or describe what you want to make. In this demo, I can switch layouts, change colors, and update text. Try “headline: Hello world” or use Customize.'));
+  content.append(element('strong', '', 'Darker'), element('p', '', 'Welcome! Pick an idea below or describe what you want to make. In this demo, I can switch layouts, change colors, and update text. Try “headline: Hello world” or use Customize.'));
   welcome.append(avatar, content);
   conversation.append(welcome);
   state.messages.forEach(({ role, text }) => {
     const message = element('div', `message ${role === 'user' ? 'user' : ''}`);
-    if (role !== 'user') message.append(element('div', 'avatar', '✳'));
+    if (role !== 'user') message.append(element('div', 'avatar', '🤖'));
     const body = element('div', 'message-content');
-    body.append(element('strong', '', role === 'user' ? 'You' : 'Lovable'), element('p', '', text));
+    body.append(element('strong', '', role === 'user' ? 'You' : 'Darker'), element('p', '', text));
     message.append(body);
     conversation.append(message);
   });
@@ -69,7 +69,7 @@ function renderPreview() {
   preview.append(nav, hero, foot);
   document.querySelector('#project-name').textContent = project.name || 'Untitled project';
   const slug = (project.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') || 'my-project').slice(0, 35);
-  document.querySelector('#preview-address').textContent = `${slug}.lovable.app`;
+  document.querySelector('#preview-address').textContent = `${slug} · preview`;
   for (const field of ['name', 'headline', 'description', 'button', 'accent']) customizeForm.elements[field].value = project[field];
 }
 function applyPrompt(text) {
@@ -142,6 +142,6 @@ document.querySelector('#download').addEventListener('click', () => {
   const accent = /^#[0-9a-f]{6}$/i.test(p.accent) ? p.accent : '#718b78';
   const html = `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${safe.name}</title><style>*{box-sizing:border-box}body{margin:0;background:#fdfcf8;color:#202421;font-family:Arial,sans-serif}nav{display:flex;justify-content:space-between;align-items:center;padding:28px 7%}nav strong{font-size:20px}nav a{color:inherit;text-decoration:none}main{display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:7%;padding:70px 7%}small{color:${accent};letter-spacing:.14em;font-weight:bold}h1{font-size:clamp(38px,5vw,68px);letter-spacing:-.05em;line-height:1.05}p{color:#687068;line-height:1.7;max-width:420px}.button{display:inline-block;background:#202020;color:white;padding:14px 20px;border-radius:5px;text-decoration:none}.visual{aspect-ratio:1;background:${accent};border-radius:8px;display:grid;place-items:center;color:#ffffffaa;font-size:100px}footer{border-top:1px solid #eee;margin:0 7%;padding:25px 0;color:#777;font-size:12px}@media(max-width:650px){main{grid-template-columns:1fr;padding-top:30px}.visual{aspect-ratio:1.5}}</style></head><body><nav><strong>${safe.name}</strong><a href="#about">About ↗</a></nav><main><div><small>${safe.eyebrow}</small><h1>${safe.headline}</h1><p>${safe.description}</p><a class="button" href="#about">${safe.button} ↗</a></div><div class="visual" aria-hidden="true">✳</div></main><footer id="about">${safe.visual}</footer></body></html>`;
   const url = URL.createObjectURL(new Blob([html], { type: 'text/html' }));
-  const link = document.createElement('a'); link.href = url; link.download = 'lovable-project.html'; link.click();
+  const link = document.createElement('a'); link.href = url; link.download = 'darker-project.html'; link.click();
   setTimeout(() => URL.revokeObjectURL(url), 1000);
 });
