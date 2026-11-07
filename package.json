@@ -1,0 +1,21 @@
+{
+  "name": "darker",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@11.28.1",
+  "engines": {
+    "node": ">=24.0.0"
+  },
+  "scripts": {
+    "start": "node --env-file-if-exists=.env server/index.js",
+    "test": "node --test tests/*.test.*",
+    "check": "node --check server/app.js && node --check server/index.js && node --check server/provision.js && node --check workspace.js && node --check auth.js && node --check pricing.js && node --check script.js"
+  },
+  "dependencies": {
+    "express": "^5.1.0",
+    "express-rate-limit": "^8.2.0",
+    "helmet": "^8.1.0",
+    "libphonenumber-js": "^1.12.0"
+  }
+}
