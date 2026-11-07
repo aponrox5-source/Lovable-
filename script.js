@@ -4,15 +4,18 @@ const promptInput = document.querySelector('#prompt');
 document.querySelectorAll('[data-prompt]').forEach((button) => {
   button.addEventListener('click', () => {
     promptInput.value = button.dataset.prompt;
+    promptInput.setCustomValidity('');
     promptInput.focus();
   });
 });
 
+promptInput.addEventListener('input', () => promptInput.setCustomValidity(''));
+
 promptForm.addEventListener('submit', (event) => {
   event.preventDefault();
-  const destination = new URL('builder.html', window.location.href);
+  const destination = new URL('workspace.html', window.location.href);
   const prompt = promptInput.value.trim();
-  if (prompt) destination.searchParams.set('prompt', prompt);
+  try { sessionStorage.setItem('darker-draft', prompt); } catch { promptInput.setCustomValidity('Allow browser storage to carry your idea into the workspace.'); promptInput.reportValidity(); return; }
   window.location.href = destination.toString();
 });
 
